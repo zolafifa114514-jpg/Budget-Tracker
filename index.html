@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PocketPlan is a simple budget tracker for students." />
+  <title>PocketPlan — money, made simple</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#top" aria-label="PocketPlan home">
+        <span class="brand-mark">P</span>
+        <span>PocketPlan</span>
+      </a>
+      <div class="side-label">Your space</div>
+      <nav class="nav-list" aria-label="Main navigation">
+        <a class="nav-link active" href="#dashboard"><span class="nav-icon">⌂</span> Overview</a>
+        <a class="nav-link" href="#activity"><span class="nav-icon">↕</span> Activity</a>
+        <a class="nav-link" href="#goals"><span class="nav-icon">◎</span> My goals</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <span class="tip-spark">✦</span>
+          <strong>Small steps add up</strong>
+          <p>Saving just $5 a week is over $250 in a year.</p>
+        </div>
+        <a class="help-link" href="#how-it-works"><span>?</span> How it works</a>
+      </div>
+    </aside>
+
+    <main id="top" class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SATURDAY, OCTOBER 3, 2026</p>
+          <h1>Good morning, <span id="greeting-name">there</span> <span class="wave">✋</span></h1>
+          <p class="subtitle">A clear view of your money, one step at a time.</p>
+        </div>
+        <label class="profile-pill" for="profile-name"><span class="avatar" id="profile-avatar">?</span><input class="profile-name-input" id="profile-name" type="text" maxlength="24" placeholder="Your name" aria-label="Your name" /><span class="chevron">⌄</span></label>
+      </header>
+
+      <section id="dashboard" class="balance-grid" aria-label="Balance summary">
+        <div class="balance-card">
+          <div class="balance-heading"><span>Available balance</span><button class="icon-button" aria-label="Hide balance" id="toggle-balance">◉</button></div>
+          <div class="balance-amount" id="balance-amount">$0.00</div>
+          <div class="balance-helper">Available to spend or save</div>
+          <div class="balance-foot"><span class="trend">↗ 12.4%</span><span>vs. last month · after recent activity</span></div>
+          <div class="balance-wave" aria-hidden="true"><svg viewBox="0 0 520 96" preserveAspectRatio="none"><path d="M0 70 C 35 45, 62 60, 92 63 S 143 77, 166 51 S 205 14, 234 38 S 284 79, 314 55 S 366 32, 395 51 S 452 45, 520 9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></div>
+        </div>
+        <div class="mini-card green-card">
+          <div class="mini-top"><span class="mini-icon">↓</span><span class="mini-label">This month</span></div>
+          <div class="mini-number" id="month-income">$0.00</div>
+          <div class="mini-caption">Money in <span>+8.2% this month</span></div>
+        </div>
+        <div class="mini-card blue-card">
+          <div class="mini-top"><span class="mini-icon">↑</span><span class="mini-label">Coming up</span></div>
+          <div class="mini-number" id="upcoming-total">$0.00</div>
+          <div class="mini-caption">Due this week <span id="upcoming-count">0 charges</span></div>
+        </div>
+      </section>
+
+      <section class="visual-grid" aria-label="Money visualizations">
+        <article class="panel visual-panel spending-visual">
+          <div class="section-heading"><div><h2>Money over time</h2><p>Your balance after each entry</p></div><span class="chart-key expense-key">● Balance</span></div>
+          <div id="balance-line-chart" class="balance-line-chart"></div>
+        </article>
+        <article class="panel visual-panel savings-visual">
+          <div class="section-heading"><div><h2>Spending split</h2><p>Where your spending goes</p></div><span class="chart-key goal-key">● Categories</span></div>
+          <div class="pie-visual-body"><div id="spending-pie" class="spending-pie"><div><strong id="spending-pie-total">$0</strong><span>spent</span></div></div><div id="spending-legend" class="spending-legend"></div></div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <div class="left-column">
+          <section class="panel quick-add-panel" aria-labelledby="quick-add-title">
+            <div class="section-heading"><div><h2 id="quick-add-title">Quick add</h2><p>Log it now, feel on top of it later.</p></div><span class="bolt">✦</span></div>
+            <div class="type-tabs" role="tablist" aria-label="Entry type"><button class="type-tab selected" data-type="income"><span>＋</span> Money in</button><button class="type-tab" data-type="expense"><span>−</span> Money spent</button></div>
+            <form id="entry-form" class="entry-form">
+              <label class="field-label" for="entry-name">What was it for?</label>
+              <input id="entry-name" name="name" type="text" placeholder="e.g. Weekend job" required />
+              <div class="form-row"><div class="field-group"><label class="field-label" for="entry-amount">Amount</label><div class="money-input"><span>$</span><input id="entry-amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0.00" required /></div></div><div class="field-group"><label class="field-label" for="entry-date">Date</label><input id="entry-date" name="date" type="date" required /></div></div>
+              <div class="field-group category-field"><label class="field-label" for="entry-category">Category</label><select id="entry-category" name="category"><option value="Food">Food &amp; drinks</option><option value="Games">Games</option><option value="Transport">Transport</option><option value="Fun">Fun</option><option value="Other">Other</option></select></div>
+              <button class="primary-button" type="submit"><span>＋</span> Add to activity</button>
+            </form>
+          </section>
+
+          <section id="goals" class="panel goals-panel" aria-labelledby="goals-title">
+            <div class="section-heading"><div><h2 id="goals-title">Saving goals</h2><p>Give your money somewhere to go.</p></div><button class="text-button" id="new-goal-button" type="button">+ New goal</button></div>
+            <form id="goal-form" class="inline-form" hidden>
+              <div class="inline-form-title">Create a goal</div>
+              <div class="form-row"><div class="field-group"><label class="field-label" for="goal-name">What are you saving for?</label><input id="goal-name" type="text" placeholder="e.g. Concert tickets" required /></div><div class="field-group"><label class="field-label" for="goal-target">Target amount</label><div class="money-input"><span>$</span><input id="goal-target" type="number" min="1" step="0.01" placeholder="0.00" required /></div></div></div>
+              <div class="inline-form-actions"><button class="secondary-button" id="cancel-goal" type="button">Cancel</button><button class="primary-button" type="submit">Create goal</button></div>
+            </form>
+            <div id="goal-list" class="goal-list"></div>
+          </section>
+        </div>
+
+        <div class="right-column">
+          <section class="panel upcoming-panel" aria-labelledby="upcoming-title">
+            <div class="section-heading"><div><h2 id="upcoming-title">Coming up &amp; owed</h2><p>See what is due before it surprises you.</p></div><button class="text-button" id="add-charge-button">+ Add item</button></div>
+            <div id="charge-list" class="charge-list"></div>
+            <button class="view-all" id="view-all-charges">View all charges <span>→</span></button>
+          </section>
+          <section id="activity" class="panel activity-panel" aria-labelledby="activity-title">
+            <div class="section-heading"><div><h2 id="activity-title">Recent activity</h2><p>Your latest money moves.</p></div><button class="text-button" id="clear-activity">Clear</button></div>
+            <div id="activity-list" class="activity-list"></div>
+          </section>
+        </div>
+      </section>
+      <footer id="how-it-works" class="footer-note"><span>✦</span> Built for real life, not perfect spreadsheets.</footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
